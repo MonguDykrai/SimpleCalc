@@ -6,15 +6,31 @@ import "./styles.css";
 
 const styles = {
   button: {
+    color: "#fff",
+    fontSize: 20,
     display: "inline-block",
-    width: 70,
-    height: 40,
+    width: 75,
+    height: 50,
     outline: "none",
-    border: "1px solid #999"
+    border: "none",
+    borderRadius: 35,
+    marginRight: 8,
+    marginBottom: 3,
+    // border: "1px solid #999",
+    backgroundColor: "#343434"
   },
   displayValue: {
-    color: "red",
-    fontSize: 50
+    color: "#000",
+    fontSize: 70,
+    textAlign: "right",
+    paddingRight: 24
+  },
+  function: {
+    backgroundColor: "#A5A5A5",
+    color: "#000"
+  },
+  operation: {
+    backgroundColor: "#FF9501"
   }
 };
 
@@ -31,58 +47,98 @@ class Calculator extends Component {
     return (
       <div className="Calculator">
         <div style={styles.displayValue}>{displayValue}</div>
-        <button style={styles.button} onClick={() => this.clearDisplay()}>
-          AC
-        </button>
-        <button style={styles.button} onClick={() => this.toggleSign()}>
-          ±
-        </button>
-        <button style={styles.button} onClick={() => this.inputOne(1)}>
-          1
-        </button>
-        <button style={styles.button} onClick={() => this.inputTwo(2)}>
-          2
-        </button>
-        <button style={styles.button} onClick={() => this.inputThree(3)}>
-          3
-        </button>
-        <button style={styles.button} onClick={() => this.inputFour(4)}>
-          4
-        </button>
-        <button style={styles.button} onClick={() => this.inputFive(5)}>
-          5
-        </button>
-        <button style={styles.button} onClick={() => this.inputSix(6)}>
-          6
-        </button>
-        <button style={styles.button} onClick={() => this.inputSeven(7)}>
-          7
-        </button>
-        <button style={styles.button} onClick={() => this.inputEight(8)}>
-          8
-        </button>
-        <button style={styles.button} onClick={() => this.inputNine(9)}>
-          9
-        </button>
-        <button style={styles.button} onClick={() => this.inputZero(0)}>
-          0
-        </button>
+        <div>
+          <button
+            style={Object.assign({}, styles.button, styles.function)}
+            onClick={() => this.clearDisplay()}
+          >
+            AC
+          </button>
+          <button
+            style={Object.assign({}, styles.button, styles.function)}
+            onClick={() => this.toggleSign()}
+          >
+            ±
+          </button>
+          <button
+            style={Object.assign({}, styles.button, styles.function, {
+              color: "#A5A5A5"
+            })}
+          >
+            null
+          </button>
+        </div>
+        <div>
+          <button style={styles.button} onClick={() => this.inputOne(1)}>
+            1
+          </button>
+          <button style={styles.button} onClick={() => this.inputTwo(2)}>
+            2
+          </button>
+          <button style={styles.button} onClick={() => this.inputThree(3)}>
+            3
+          </button>
+        </div>
+        <div>
+          <button style={styles.button} onClick={() => this.inputFour(4)}>
+            4
+          </button>
+          <button style={styles.button} onClick={() => this.inputFive(5)}>
+            5
+          </button>
+          <button style={styles.button} onClick={() => this.inputSix(6)}>
+            6
+          </button>
+        </div>
+        <div>
+          <button style={styles.button} onClick={() => this.inputSeven(7)}>
+            7
+          </button>
+          <button style={styles.button} onClick={() => this.inputEight(8)}>
+            8
+          </button>
+          <button style={styles.button} onClick={() => this.inputNine(9)}>
+            9
+          </button>
+        </div>
+        <div>
+          <button style={styles.button} onClick={() => this.inputZero(0)}>
+            0
+          </button>
 
-        <button style={styles.button} onClick={() => this.inputPlus()}>
-          +
-        </button>
-        <button style={styles.button} onClick={() => this.inputSubtract()}>
-          -
-        </button>
-        <button style={styles.button} onClick={() => this.inputMultiply()}>
-          *
-        </button>
-        <button style={styles.button} onClick={() => this.inputDivide()}>
-          /
-        </button>
-        <button style={styles.button} onClick={() => this.inputEuqal()}>
-          =
-        </button>
+          <button
+            style={Object.assign({}, styles.button, styles.operation)}
+            onClick={() => this.inputPlus()}
+          >
+            +
+          </button>
+          <button
+            style={Object.assign({}, styles.button, styles.operation)}
+            onClick={() => this.inputSubtract()}
+          >
+            -
+          </button>
+        </div>
+        <div>
+          <button
+            style={Object.assign({}, styles.button, styles.operation)}
+            onClick={() => this.inputMultiply()}
+          >
+            *
+          </button>
+          <button
+            style={Object.assign({}, styles.button, styles.operation)}
+            onClick={() => this.inputDivide()}
+          >
+            /
+          </button>
+          <button
+            style={Object.assign({}, styles.button, styles.operation)}
+            onClick={() => this.inputEuqal()}
+          >
+            =
+          </button>
+        </div>
         <DisplayStateChange {...this.state} />
       </div>
     );

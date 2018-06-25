@@ -10,7 +10,8 @@ const styles = {
   wrapper: {
     width: 400,
     margin: "20px auto",
-    position: "relative"
+    position: "relative",
+    backgroundColor: "#fff"
   }
 };
 
