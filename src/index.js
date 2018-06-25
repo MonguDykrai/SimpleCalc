@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
+import { render } from "react-dom";
 
 import "./styles.css";
 
@@ -16,16 +16,21 @@ const styles = {
 class App extends Component {
   state = {
     displayValue: "0",
-    valueWaitingForOperate: null,
-    operator: null
+    valueWaitingForAnOperation: null,
+    operator: null,
+    isWaitingForOperation: false
   };
   render() {
-    console.log(this.state);
+    const {
+      displayValue,
+      valueWaitingForAnOperation,
+      operator,
+      isWaitingForOperation
+    } = this.state;
+    // console.log(this.state);
     return (
       <div className="App">
-        <div style={{ color: "red", fontSize: 50 }}>
-          {this.state.displayValue}
-        </div>
+        <div style={{ color: "red", fontSize: 50 }}>{displayValue}</div>
         <button style={styles.button} onClick={() => this.inputOne(1)}>
           1
         </button>
@@ -38,24 +43,63 @@ class App extends Component {
         <button style={styles.button} onClick={() => this.inputEuqal()}>
           =
         </button>
+        <div
+          style={{
+            width: 400,
+            margin: "20px auto",
+            position: "relative"
+          }}
+        >
+          <div style={{ textAlign: "left" }}>{`{`}</div>
+          <br />
+          <div style={{ textAlign: "left" }}>
+            &nbsp;&nbsp;displayValue:
+            <span style={{ color: "#f00" }}>{` ${displayValue}`}</span>
+          </div>
+          <div style={{ textAlign: "left" }}>
+            &nbsp;&nbsp;valueWaitingForAnOperation:
+            <span
+              style={{ color: "#f00" }}
+            >{` ${valueWaitingForAnOperation}`}</span>
+          </div>
+          <div style={{ textAlign: "left" }}>
+            &nbsp;&nbsp;operator:
+            <span style={{ color: "#f00" }}>{` ${operator}`}</span>
+          </div>
+          <div style={{ textAlign: "left" }}>
+            &nbsp;&nbsp;isWaitingForOperation:
+            <span style={{ color: "#f00" }}>{` ${isWaitingForOperation}`}</span>
+          </div>
+          <br />
+          <div style={{ textAlign: "left" }}>{`}`}</div>
+        </div>
       </div>
     );
   }
 
   inputOne(value) {
-    const { displayValue } = this.state;
-    console.log(String(value));
-    this.setState({
-      displayValue: displayValue === "0" ? String(value) : displayValue + value
-    });
+    const { displayValue, isWaitingForOperation } = this.state;
+    // console.log(String(value));
+    if (isWaitingForOperation) {
+      this.setState({
+        displayValue: String(value),
+        isWaitingForOperation: false
+      });
+    } else {
+      this.setState({
+        displayValue:
+          displayValue === "0" ? String(value) : displayValue + value
+      });
+    }
   }
 
   inputTwo(value) {
-    const { displayValue, valueWaitingForOperate } = this.state;
-    console.log(String(value));
-    if (valueWaitingForOperate !== null) {
+    const { displayValue, isWaitingForOperation } = this.state;
+    // console.log(String(value));
+    if (isWaitingForOperation) {
       this.setState({
-        displayValue: String(value)
+        displayValue: String(value),
+        isWaitingForOperation: false
       });
     } else {
       this.setState({
@@ -67,25 +111,31 @@ class App extends Component {
 
   inputPlus() {
     const { displayValue } = this.state;
-    console.log(`+`);
+    // console.log(`+`);
     this.setState({
-      valueWaitingForOperate: displayValue,
-      operator: "+"
+      valueWaitingForAnOperation: displayValue,
+      operator: "+",
+      isWaitingForOperation: true
     });
   }
 
   inputEuqal() {
-    const { displayValue, valueWaitingForOperate } = this.state;
-    console.log(`=`);
+    const {
+      displayValue,
+      valueWaitingForAnOperation,
+      isWaitingForOperation
+    } = this.state;
+    // console.log(`=`);
+    if (isWaitingForOperation) return;
     this.setState({
       displayValue: String(
-        parseFloat(displayValue) + parseFloat(valueWaitingForOperate)
+        Number(displayValue) + Number(valueWaitingForAnOperation)
       ),
-      valueWaitingForOperate: null,
-      operator: null
+      valueWaitingForAnOperation: null,
+      operator: null,
+      isWaitingForOperation: true
     });
   }
 }
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
+render(<App />, document.getElementById("root"));
