@@ -1,2 +1,1 @@
-# SimpleCalc
-Created with CodeSandbox
+# README
