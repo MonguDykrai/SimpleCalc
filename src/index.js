@@ -37,11 +37,36 @@ class Calculator extends Component {
         <button style={styles.button} onClick={() => this.inputOne(1)}>
           1
         </button>
-        <button style={styles.button} onClick={() => this.inputPlus()}>
-          +
-        </button>
         <button style={styles.button} onClick={() => this.inputTwo(2)}>
           2
+        </button>
+        <button style={styles.button} onClick={() => this.inputThree(3)}>
+          3
+        </button>
+        <button style={styles.button} onClick={() => this.inputFour(4)}>
+          4
+        </button>
+        <button style={styles.button} onClick={() => this.inputFive(5)}>
+          5
+        </button>
+        <button style={styles.button} onClick={() => this.inputSix(6)}>
+          6
+        </button>
+        <button style={styles.button} onClick={() => this.inputSeven(7)}>
+          7
+        </button>
+        <button style={styles.button} onClick={() => this.inputEight(8)}>
+          8
+        </button>
+        <button style={styles.button} onClick={() => this.inputNine(9)}>
+          9
+        </button>
+        <button style={styles.button} onClick={() => this.inputZero(0)}>
+          0
+        </button>
+
+        <button style={styles.button} onClick={() => this.inputPlus()}>
+          +
         </button>
         <button style={styles.button} onClick={() => this.inputEuqal()}>
           =
@@ -76,6 +101,126 @@ class Calculator extends Component {
   }
 
   inputTwo(value) {
+    const { displayValue, isWaitingForOperation } = this.state;
+    if (isWaitingForOperation) {
+      this.setState({
+        displayValue: String(value),
+        isWaitingForOperation: false
+      });
+    } else {
+      this.setState({
+        displayValue:
+          displayValue === "0" ? String(value) : displayValue + value
+      });
+    }
+  }
+
+  inputThree(value) {
+    const { displayValue, isWaitingForOperation } = this.state;
+    if (isWaitingForOperation) {
+      this.setState({
+        displayValue: String(value),
+        isWaitingForOperation: false
+      });
+    } else {
+      this.setState({
+        displayValue:
+          displayValue === "0" ? String(value) : displayValue + value
+      });
+    }
+  }
+
+  inputFour(value) {
+    const { displayValue, isWaitingForOperation } = this.state;
+    if (isWaitingForOperation) {
+      this.setState({
+        displayValue: String(value),
+        isWaitingForOperation: false
+      });
+    } else {
+      this.setState({
+        displayValue:
+          displayValue === "0" ? String(value) : displayValue + value
+      });
+    }
+  }
+
+  inputFive(value) {
+    const { displayValue, isWaitingForOperation } = this.state;
+    if (isWaitingForOperation) {
+      this.setState({
+        displayValue: String(value),
+        isWaitingForOperation: false
+      });
+    } else {
+      this.setState({
+        displayValue:
+          displayValue === "0" ? String(value) : displayValue + value
+      });
+    }
+  }
+
+  inputSix(value) {
+    const { displayValue, isWaitingForOperation } = this.state;
+    if (isWaitingForOperation) {
+      this.setState({
+        displayValue: String(value),
+        isWaitingForOperation: false
+      });
+    } else {
+      this.setState({
+        displayValue:
+          displayValue === "0" ? String(value) : displayValue + value
+      });
+    }
+  }
+
+  inputSeven(value) {
+    const { displayValue, isWaitingForOperation } = this.state;
+    if (isWaitingForOperation) {
+      this.setState({
+        displayValue: String(value),
+        isWaitingForOperation: false
+      });
+    } else {
+      this.setState({
+        displayValue:
+          displayValue === "0" ? String(value) : displayValue + value
+      });
+    }
+  }
+
+  inputEight(value) {
+    const { displayValue, isWaitingForOperation } = this.state;
+    if (isWaitingForOperation) {
+      this.setState({
+        displayValue: String(value),
+        isWaitingForOperation: false
+      });
+    } else {
+      this.setState({
+        displayValue:
+          displayValue === "0" ? String(value) : displayValue + value
+      });
+    }
+  }
+
+  inputNine(value) {
+    const { displayValue, isWaitingForOperation } = this.state;
+    if (isWaitingForOperation) {
+      this.setState({
+        displayValue: String(value),
+        isWaitingForOperation: false
+      });
+    } else {
+      this.setState({
+        displayValue:
+          displayValue === "0" ? String(value) : displayValue + value
+      });
+    }
+  }
+
+  inputZero(value) {
     const { displayValue, isWaitingForOperation } = this.state;
     if (isWaitingForOperation) {
       this.setState({
