@@ -7,7 +7,7 @@ import "./styles.css";
 const styles = {
   button: {
     display: "inline-block",
-    width: 100,
+    width: 70,
     height: 40,
     outline: "none",
     border: "1px solid #999"
@@ -33,6 +33,9 @@ class Calculator extends Component {
         <div style={styles.displayValue}>{displayValue}</div>
         <button style={styles.button} onClick={() => this.clearDisplay()}>
           AC
+        </button>
+        <button style={styles.button} onClick={() => this.toggleSign()}>
+          ±
         </button>
         <button style={styles.button} onClick={() => this.inputOne(1)}>
           1
@@ -68,6 +71,15 @@ class Calculator extends Component {
         <button style={styles.button} onClick={() => this.inputPlus()}>
           +
         </button>
+        <button style={styles.button} onClick={() => this.inputSubtract()}>
+          -
+        </button>
+        <button style={styles.button} onClick={() => this.inputMultiply()}>
+          *
+        </button>
+        <button style={styles.button} onClick={() => this.inputDivide()}>
+          /
+        </button>
         <button style={styles.button} onClick={() => this.inputEuqal()}>
           =
         </button>
@@ -82,6 +94,17 @@ class Calculator extends Component {
       valueWaitingForAnOperation: null,
       operator: null,
       isWaitingForOperation: false
+    });
+  }
+
+  toggleSign() {
+    const { displayValue } = this.state;
+
+    this.setState({
+      displayValue:
+        displayValue.charAt(0) === "-"
+          ? displayValue.substr(1)
+          : `-${displayValue}`
     });
   }
 
@@ -244,17 +267,74 @@ class Calculator extends Component {
     });
   }
 
+  inputSubtract() {
+    const { displayValue } = this.state;
+    this.setState({
+      valueWaitingForAnOperation: displayValue,
+      operator: "-",
+      isWaitingForOperation: true
+    });
+  }
+
+  inputMultiply() {
+    const { displayValue } = this.state;
+    this.setState({
+      valueWaitingForAnOperation: displayValue,
+      operator: "*",
+      isWaitingForOperation: true
+    });
+  }
+
+  inputDivide() {
+    const { displayValue } = this.state;
+    this.setState({
+      valueWaitingForAnOperation: displayValue,
+      operator: "/",
+      isWaitingForOperation: true
+    });
+  }
+
   inputEuqal() {
     const {
       displayValue,
       valueWaitingForAnOperation,
-      isWaitingForOperation
+      isWaitingForOperation,
+      operator
     } = this.state;
     if (isWaitingForOperation) return;
+
+    switch (operator) {
+      case "+":
+        this.setState({
+          displayValue: String(
+            Number(valueWaitingForAnOperation) + Number(displayValue)
+          )
+        });
+        break;
+      case "-":
+        this.setState({
+          displayValue: String(
+            Number(valueWaitingForAnOperation) - Number(displayValue)
+          )
+        });
+        break;
+      case "*":
+        this.setState({
+          displayValue: String(
+            Number(valueWaitingForAnOperation) * Number(displayValue)
+          )
+        });
+        break;
+      case "/":
+        this.setState({
+          displayValue: String(
+            Number(valueWaitingForAnOperation) / Number(displayValue)
+          )
+        });
+        break;
+    }
+
     this.setState({
-      displayValue: String(
-        Number(displayValue) + Number(valueWaitingForAnOperation)
-      ),
       valueWaitingForAnOperation: null,
       operator: null,
       isWaitingForOperation: true
